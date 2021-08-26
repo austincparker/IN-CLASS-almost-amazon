@@ -1,4 +1,6 @@
+import { showBooks } from '../components/books';
 import addBookForm from '../components/forms/addBookForm';
+import { createBook } from '../helpers/data/bookData';
 
 const domEvents = () => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
@@ -17,7 +19,15 @@ const domEvents = () => {
 
     // CLICK EVENT FOR SUBMITTING FORM FOR ADDING A BOOK
     if (e.target.id.includes('submit-book')) {
-      console.warn('CLICKED SUBMIT BOOK', e.target.id);
+      e.preventDefault();
+      const bookObject = {
+        title: document.querySelector('#title').value,
+        image: document.querySelector('#image').value,
+        price: document.querySelector('#price').value,
+        sale: document.querySelector('#sale').value,
+        author_id: document.querySelector('#author_id').value
+      };
+      createBook(bookObject).then((booksArray) => showBooks(booksArray));
     }
 
     // CLICK EVENT FOR SHOWING MODAL FORM FOR ADDING A BOOK
