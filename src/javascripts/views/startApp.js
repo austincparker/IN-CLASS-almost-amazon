@@ -5,6 +5,8 @@ import navBar from '../components/navBar';
 import domEvents from '../events/domEvents';
 import navigationEvents from '../events/navigationEvents';
 import { getBooks } from '../helpers/data/bookData';
+// import getAuthors from '../helpers/data/authorData';
+// import { showAuthors } from '../components/authors';
 
 const startApp = () => {
   domBuilder(); // BUILD THE DOM
