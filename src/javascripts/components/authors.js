@@ -3,18 +3,18 @@
 const showAuthors = (array) => {
   document.querySelector('#store').innerHTML = '';
   // CREATE A BUTTON TO ADD BOOKS
-
+  document.querySelector('#add-button').innerHTML = '<button class="btn btn-success btn-lg mb-4" id="add-author-btn">Add an Author</button>';
   array.forEach((item) => {
     // FIXME: STUDENTS create cards for your authors
-    document.querySelector('#store').innerHTML += `<div class="card" style="width: 18rem;">
+    document.querySelector('#store').innerHTML += `<div class="card w-50">
     <div class="card-body">
       <h5 class="card-title">${item.first_name} ${item.last_name}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
+      <p class="card-text">${item.email}</p>
+      <a href="#" class="btn btn-primary">Update</a>
+      <a href="#" class="btn btn-danger">Delete</a>
     </div>
-  </div>`;
+  </div>
+  `;
   });
 };
 
