@@ -3,7 +3,7 @@
 const showAuthors = (array) => {
   document.querySelector('#store').innerHTML = '';
   // CREATE A BUTTON TO ADD BOOKS
-  document.querySelector('#add-button').innerHTML = '<button class="btn btn-success btn-lg mb-4" id="add-author-btn">Add an Author</button>';
+  document.querySelector('#add-button').innerHTML = '<button class="btn btn-success btn-lg mb-4 mx-2" id="add-author-btn">Add an Author</button><button class="btn btn-primary btn-lg mb-4" id="fav-author-btn">Favorite Authors Only</button>';
   array.forEach((item) => {
     // FIXME: STUDENTS create cards for your authors
     document.querySelector('#store').innerHTML += `<div class="card w-50">

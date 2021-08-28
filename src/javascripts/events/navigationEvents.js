@@ -1,5 +1,5 @@
 import signOut from '../helpers/auth/signOut';
-import { getBooks } from '../helpers/data/bookData';
+import { booksOnSale, getBooks } from '../helpers/data/bookData';
 import { showBooks } from '../components/books';
 import { getAuthors } from '../helpers/data/authorData';
 import { showAuthors } from '../components/authors';
@@ -13,6 +13,7 @@ const navigationEvents = () => {
   // BOOKS ON SALE
   document.querySelector('#sale-books').addEventListener('click', () => {
     console.warn('Sale Books');
+    booksOnSale().then(showBooks); // or booksOnSale().then((booksArray) => showBooks(booksArray));
   });
 
   // ALL BOOKS
