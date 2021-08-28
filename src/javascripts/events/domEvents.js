@@ -2,7 +2,7 @@ import { showBooks } from '../components/books';
 import addBookForm from '../components/forms/addBookForm';
 import { createBook, deleteBook } from '../helpers/data/bookData';
 import addAuthorForm from '../components/forms/addAuthorForm';
-import { authorFav, createAuthor } from '../helpers/data/authorData';
+import { authorFav, createAuthor, deleteAuthor } from '../helpers/data/authorData';
 import { showAuthors } from '../components/authors';
 
 const domEvents = () => {
@@ -46,6 +46,14 @@ const domEvents = () => {
     }
 
     // ADD CLICK EVENT FOR DELETING AN AUTHOR
+    if (e.target.id.includes('del-author-btn')) {
+      if (window.confirm('Want to delete?')) {
+        // console.warn(e.target.id);
+        const [, id] = e.target.id.split('--');
+        deleteAuthor(id).then(showAuthors);
+      }
+    }
+
     // ADD CLICK EVENT FOR SHOWING FORM FOR ADDING AN AUTHOR
     if (e.target.id.includes('add-author-btn')) {
       addAuthorForm();

@@ -10,6 +10,14 @@ const getAuthors = () => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 // DELETE AUTHOR
+const deleteAuthor = (firebaseKey) => new Promise((resolve, reject) => {
+  axios.delete(`${dbUrl}/authors/${firebaseKey}.json`)
+    .then(() => {
+      getAuthors().then(resolve);
+    })
+    .catch(reject);
+});
+
 // CREATE AUTHOR
 
 const createAuthor = (authorObj) => new Promise((resolve, reject) => {
@@ -35,4 +43,6 @@ const authorFav = () => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export { getAuthors, createAuthor, authorFav };
+export {
+  getAuthors, createAuthor, authorFav, deleteAuthor
+};
