@@ -10,7 +10,7 @@ const showAuthors = (array) => {
     <div class="card-body">
       <h5 class="card-title">${item.first_name} ${item.last_name}</h5>
       <p class="card-text">${item.email}</p>
-      <a href="#" class="btn btn-primary" id="edit-author-btn">Update</a>
+      <a href="#" class="btn btn-primary" id="edit-author-btn--${item.firebaseKey}">Update</a>
       <a href="#" class="btn btn-danger" id="del-author-btn--${item.firebaseKey}">Delete</a>
     </div>
   </div>
