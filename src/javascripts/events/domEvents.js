@@ -4,7 +4,9 @@ import {
   createBook, deleteBook, getSingleBook, updateBook
 } from '../helpers/data/bookData';
 import addAuthorForm from '../components/forms/addAuthorForm';
-import { authorFav, createAuthor, deleteAuthor } from '../helpers/data/authorData';
+import {
+  authorFav, createAuthor, deleteAuthor, getSingleAuthor
+} from '../helpers/data/authorData';
 import { showAuthors } from '../components/authors';
 
 const domEvents = () => {
@@ -89,6 +91,16 @@ const domEvents = () => {
       createAuthor(authorObject).then((authorsArray) => showAuthors(authorsArray));
     }
     // ADD CLICK EVENT FOR EDITING AN AUTHOR
+
+    if (e.target.id.includes('edit-author-btn')) {
+      console.warn('CLICKED EDIT AUTHOR', e.target.id);
+
+      const [, id] = e.target.id.split('--');
+
+      getSingleAuthor(id).then((authorObj) => addAuthorForm(authorObj));
+      // console.warn(id);
+    }
+
     // ADD CLICK EVENT TO FILTER FAV AUTHORS
     if (e.target.id.includes('fav-author-btn')) {
       authorFav().then(showAuthors);
