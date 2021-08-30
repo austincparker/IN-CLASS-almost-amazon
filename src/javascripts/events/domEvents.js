@@ -5,7 +5,7 @@ import {
 } from '../helpers/data/bookData';
 import addAuthorForm from '../components/forms/addAuthorForm';
 import {
-  authorFav, createAuthor, deleteAuthor, getSingleAuthor
+  authorFav, createAuthor, deleteAuthor, getSingleAuthor, updateAuthor
 } from '../helpers/data/authorData';
 import { showAuthors } from '../components/authors';
 
@@ -99,6 +99,21 @@ const domEvents = () => {
 
       getSingleAuthor(id).then((authorObj) => addAuthorForm(authorObj));
       // console.warn(id);
+    }
+
+    // ADD CLICK EVENT FOR UPDATING AN AUTHOR
+    if (e.target.id.includes('update-author')) {
+      console.warn('clicked update author');
+      e.preventDefault();
+      const [, firebaseKey] = e.target.id.split('--');
+      const authorObject = {
+        first_name: document.querySelector('#author-fname').value,
+        last_name: document.querySelector('#author-lname').value,
+        email: document.querySelector('#author-email').value,
+        firebaseKey
+      };
+      console.warn(authorObject);
+      updateAuthor(authorObject).then(showAuthors);
     }
 
     // ADD CLICK EVENT TO FILTER FAV AUTHORS

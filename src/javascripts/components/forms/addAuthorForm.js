@@ -20,7 +20,7 @@ const addAuthorForm = (obj = {}) => {
         <label class="form-check-label" for="favorite">Favorite?</label>
       </div>
             <button type="submit" 
-            id="${obj.firebaseKey ? `update author--${obj.firebaseKey}` : 'submit-author-btn'}" class="btn btn-primary">Submit Author</button>
+            id="${obj.firebaseKey ? `update-author--${obj.firebaseKey}` : 'submit-author-btn'}" class="btn btn-primary">Submit Author</button>
         </form>`;
 };
 

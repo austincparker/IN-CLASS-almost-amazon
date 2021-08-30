@@ -40,6 +40,11 @@ const createAuthor = (authorObj) => new Promise((resolve, reject) => {
 });
 
 // UPDATE AUTHOR
+const updateAuthor = (authorObj) => new Promise((resolve, reject) => {
+  axios.patch(`${dbUrl}/authors/${authorObj.firebaseKey}.json`, authorObj)
+    .then(() => getAuthors().then(resolve))
+    .catch(reject);
+});
 
 // SEARCH AUTHORS
 
@@ -52,5 +57,5 @@ const authorFav = () => new Promise((resolve, reject) => {
 });
 
 export {
-  getAuthors, createAuthor, authorFav, deleteAuthor, getSingleAuthor
+  getAuthors, createAuthor, authorFav, deleteAuthor, getSingleAuthor, updateAuthor
 };
