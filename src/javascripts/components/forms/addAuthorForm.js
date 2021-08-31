@@ -1,6 +1,7 @@
+import clearDom from '../../helpers/data/clearDom';
+
 const addAuthorForm = (obj = {}) => {
-  document.querySelector('#store').innerHTML = '';
-  document.querySelector('#add-button').innerHTML = '';
+  clearDom();
   document.querySelector('#form-container').innerHTML = `
         <form id="submit-author-form" class="mb-4">
             <div class="form-group">

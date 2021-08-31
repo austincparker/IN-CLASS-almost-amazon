@@ -1,7 +1,8 @@
+import clearDom from '../helpers/data/clearDom';
 // FIXME: STUDENTS show your authors
 
 const showAuthors = (array) => {
-  document.querySelector('#store').innerHTML = '';
+  clearDom();
   // CREATE A BUTTON TO ADD BOOKS
   document.querySelector('#add-button').innerHTML = '<button class="btn btn-success btn-lg mb-4 mx-2" id="add-author-btn">Add an Author</button><button class="btn btn-primary btn-lg mb-4" id="fav-author-btn">Favorite Authors Only</button>';
   array.forEach((item) => {
@@ -10,6 +11,7 @@ const showAuthors = (array) => {
     <div class="card-body">
       <h5 class="card-title">${item.first_name} ${item.last_name}</h5>
       <p class="card-text">${item.email}</p>
+      <i class="btn btn-success fas fa-eye" id="view-author-btn--${item.firebaseKey}"></i>
       <a href="#" class="btn btn-primary" id="edit-author-btn--${item.firebaseKey}">Update</a>
       <a href="#" class="btn btn-danger" id="del-author-btn--${item.firebaseKey}">Delete</a>
     </div>
