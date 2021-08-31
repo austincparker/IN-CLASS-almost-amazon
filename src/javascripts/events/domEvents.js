@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import { showBooks } from '../components/books';
 import addBookForm from '../components/forms/addBookForm';
 import {
@@ -10,6 +11,7 @@ import {
 import { showAuthors } from '../components/authors';
 import viewBook from '../components/viewBook';
 import viewAuthor from '../components/viewAuthor';
+import viewBookDetails from '../helpers/data/mergedData';
 
 const domEvents = () => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
@@ -70,11 +72,15 @@ const domEvents = () => {
       // console.warn('CLICKED EDIT BOOK', e.target.id);
     }
 
+    // VIEW BOOK BUTTON
+
     if (e.target.id.includes('view-book-btn')) {
       console.warn(e.target.id);
       const [, firebaseKey] = e.target.id.split('--');
-      getSingleBook(firebaseKey).then(viewBook);
+      viewBookDetails(firebaseKey).then(viewBook);
     }
+
+    // VIEW AUTHOR BUTTON
 
     if (e.target.id.includes('view-author-btn')) {
       console.warn(e.target.id);
