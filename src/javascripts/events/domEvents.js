@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import { showBooks } from '../components/books';
 import addBookForm from '../components/forms/addBookForm';
 import {
@@ -8,6 +9,9 @@ import {
   authorFav, createAuthor, deleteAuthor, getSingleAuthor, updateAuthor
 } from '../helpers/data/authorData';
 import { showAuthors } from '../components/authors';
+import viewBook from '../components/viewBook';
+import viewAuthor from '../components/viewAuthor';
+import viewBookDetails from '../helpers/data/mergedData';
 
 const domEvents = () => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
@@ -33,6 +37,7 @@ const domEvents = () => {
         title: document.querySelector('#title').value,
         image: document.querySelector('#image').value,
         price: document.querySelector('#price').value,
+        description: document.querySelector('#description').value,
         sale: document.querySelector('#sale').value,
         author_id: document.querySelector('#author_id').value
       };
@@ -57,6 +62,7 @@ const domEvents = () => {
         title: document.querySelector('#title').value,
         image: document.querySelector('#image').value,
         price: document.querySelector('#price').value,
+        description: document.querySelector('#description').value,
         sale: document.querySelector('#sale').value,
         author_id: document.querySelector('#author_id').value,
         firebaseKey
@@ -64,6 +70,22 @@ const domEvents = () => {
       console.warn(bookObject);
       updateBook(bookObject).then(showBooks);
       // console.warn('CLICKED EDIT BOOK', e.target.id);
+    }
+
+    // VIEW BOOK BUTTON
+
+    if (e.target.id.includes('view-book-btn')) {
+      console.warn(e.target.id);
+      const [, firebaseKey] = e.target.id.split('--');
+      viewBookDetails(firebaseKey).then(viewBook);
+    }
+
+    // VIEW AUTHOR BUTTON
+
+    if (e.target.id.includes('view-author-btn')) {
+      console.warn(e.target.id);
+      const [, firebaseKey] = e.target.id.split('--');
+      getSingleAuthor(firebaseKey).then(viewAuthor);
     }
 
     // ADD CLICK EVENT FOR DELETING AN AUTHOR
