@@ -11,7 +11,7 @@ import {
 import { showAuthors } from '../components/authors';
 import viewBook from '../components/viewBook';
 import viewAuthor from '../components/viewAuthor';
-import { viewAuthorDetails, viewBookDetails } from '../helpers/data/mergedData';
+import { deleteAuthorsBooks, viewAuthorDetails, viewBookDetails } from '../helpers/data/mergedData';
 
 const domEvents = () => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
@@ -85,6 +85,7 @@ const domEvents = () => {
     if (e.target.id.includes('view-author-btn')) {
       console.warn(e.target.id);
       const [, firebaseKey] = e.target.id.split('--');
+      console.warn(firebaseKey);
       viewAuthorDetails(firebaseKey).then(viewAuthor);
     }
 
@@ -93,6 +94,7 @@ const domEvents = () => {
       if (window.confirm('Want to delete?')) {
         // console.warn(e.target.id);
         const [, id] = e.target.id.split('--');
+        deleteAuthorsBooks(id);
         deleteAuthor(id).then(showAuthors);
       }
     }
