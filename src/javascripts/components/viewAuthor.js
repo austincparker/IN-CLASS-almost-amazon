@@ -18,8 +18,8 @@ const viewAuthor = (obj) => {
        </div>;
     </div>
   </div>`;
-  console.warn(obj.bookObject);
-  obj.bookObject.forEach((item) => {
+  console.warn(obj.authorBookArray);
+  obj.authorBookArray.forEach((item) => {
     document.querySelector('#authorsBooks').innerHTML += `
         <div class="card">
             <img class="card-img-top" src=${item.image} alt=${item.title} style="height: 400px;">

@@ -25,8 +25,8 @@ const viewAuthorDetails = (authorFirebaseKey) => new Promise((resolve, reject) =
     .then((authorObject) => {
       console.warn(authorObject);
       getAuthorsBooks(authorObject.firebaseKey)
-        .then((bookObject) => {
-          resolve({ bookObject, ...authorObject });
+        .then((authorBookArray) => {
+          resolve({ authorBookArray, ...authorObject });
         });
     }).catch(reject);
 });
