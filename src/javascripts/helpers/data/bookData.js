@@ -45,7 +45,7 @@ const createBook = (bookObj) => new Promise((resolve, reject) => {
 // UPDATE BOOK
 const updateBook = (bookObj) => new Promise((resolve, reject) => {
   axios.patch(`${dbUrl}/books/${bookObj.firebaseKey}.json`, bookObj)
-    .then(() => getBooks().then(resolve))
+    .then(() => getBooks(bookObj.uid).then(resolve))
     .catch(reject);
 });
 

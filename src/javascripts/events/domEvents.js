@@ -51,7 +51,7 @@ const domEvents = (userId) => {
 
       const [, id] = e.target.id.split('--');
 
-      getSingleBook(id).then((bookObj) => addBookForm(bookObj));
+      getSingleBook(id).then((bookObj) => addBookForm(bookObj.uid, bookObj));
       // console.warn(id);
     }
 
@@ -66,7 +66,8 @@ const domEvents = (userId) => {
         description: document.querySelector('#description').value,
         sale: document.querySelector('#sale').value,
         author_id: document.querySelector('#author_id').value,
-        firebaseKey
+        firebaseKey,
+        uid: userId
       };
       console.warn(bookObject);
       updateBook(bookObject).then(showBooks);
@@ -96,7 +97,7 @@ const domEvents = (userId) => {
         // console.warn(e.target.id);
         const [, id] = e.target.id.split('--');
         deleteAuthorsBooks(id);
-        deleteAuthor(id).then(showAuthors);
+        deleteAuthor(id, userId).then(showAuthors);
       }
     }
 
@@ -111,7 +112,8 @@ const domEvents = (userId) => {
       const authorObject = {
         first_name: document.querySelector('#author-fname').value,
         last_name: document.querySelector('#author-lname').value,
-        email: document.querySelector('#author-email').value
+        email: document.querySelector('#author-email').value,
+        uid: userId
       };
       createAuthor(authorObject).then((authorsArray) => showAuthors(authorsArray));
     }
@@ -135,7 +137,8 @@ const domEvents = (userId) => {
         first_name: document.querySelector('#author-fname').value,
         last_name: document.querySelector('#author-lname').value,
         email: document.querySelector('#author-email').value,
-        firebaseKey
+        firebaseKey,
+        uid: userId
       };
       console.warn(authorObject);
       updateAuthor(authorObject).then(showAuthors);
@@ -143,7 +146,7 @@ const domEvents = (userId) => {
 
     // ADD CLICK EVENT TO FILTER FAV AUTHORS
     if (e.target.id.includes('fav-author-btn')) {
-      authorFav().then(showAuthors);
+      authorFav(userId).then(showAuthors);
     }
   });
 };
