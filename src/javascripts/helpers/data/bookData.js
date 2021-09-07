@@ -5,17 +5,17 @@ import firebaseConfig from '../../../api/apiKeys';
 const dbUrl = firebaseConfig.databaseURL;
 
 // GET BOOKS
-const getBooks = () => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/books.json`)
+const getBooks = (userId) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/books.json?orderBy="uid"&equalTo="${userId}"`)
     .then((response) => resolve(Object.values(response.data)))
     .catch((error) => reject(error));
 });
 
 // DELETE BOOK
-const deleteBook = (firebaseKey) => new Promise((resolve, reject) => {
+const deleteBook = (firebaseKey, userId) => new Promise((resolve, reject) => {
   axios.delete(`${dbUrl}/books/${firebaseKey}.json`)
     .then(() => {
-      getBooks().then(resolve);
+      getBooks(userId).then(resolve);
     })
     .catch(reject);
 });
@@ -37,7 +37,7 @@ const createBook = (bookObj) => new Promise((resolve, reject) => {
 
       axios.patch(`${dbUrl}/books/${response.data.name}.json`, body)
         .then(() => {
-          getBooks().then((booksArray) => resolve(booksArray));
+          getBooks(bookObj.uid).then((booksArray) => resolve(booksArray));
         });
     }).catch((error) => reject(error));
 });
@@ -52,10 +52,12 @@ const updateBook = (bookObj) => new Promise((resolve, reject) => {
 // SEARCH BOOKS
 
 // FILTER BOOKS ON SALE
-const booksOnSale = () => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/books.json?orderBy="sale"&equalTo=true`)
-    .then((response) => resolve(Object.values(response.data)))
-    .catch((error) => reject(error));
+const booksOnSale = (userId) => new Promise((resolve, reject) => {
+  getBooks(userId)
+    .then((userBooksArray) => {
+      const onSaleBooks = userBooksArray.filter((book) => book.sale);
+      resolve(onSaleBooks);
+    }).catch(reject);
 });
 
 // GET AUTHORS BOOKS

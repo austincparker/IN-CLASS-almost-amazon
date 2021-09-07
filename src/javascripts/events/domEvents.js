@@ -13,21 +13,21 @@ import viewBook from '../components/viewBook';
 import viewAuthor from '../components/viewAuthor';
 import { deleteAuthorsBooks, viewAuthorDetails, viewBookDetails } from '../helpers/data/mergedData';
 
-const domEvents = () => {
+const domEvents = (userId) => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
     // CLICK EVENT FOR DELETING A BOOK
     if (e.target.id.includes('delete-book')) {
       if (window.confirm('Want to delete?')) {
         // console.warn('CLICKED DELETE BOOK', e.target.id);
         const [, id] = e.target.id.split('--');
-        deleteBook(id).then(showBooks);
+        deleteBook(id, userId).then(showBooks);
       }
     }
 
     // CLICK EVENT FOR SHOWING FORM FOR ADDING A BOOK
     if (e.target.id.includes('add-book-btn')) {
       console.warn('CLICKED ADD BOOK BUTTON', e.target.id);
-      addBookForm();
+      addBookForm(userId);
     }
 
     // CLICK EVENT FOR SUBMITTING FORM FOR ADDING A BOOK
@@ -39,7 +39,8 @@ const domEvents = () => {
         price: document.querySelector('#price').value,
         description: document.querySelector('#description').value,
         sale: document.querySelector('#sale').value,
-        author_id: document.querySelector('#author_id').value
+        author_id: document.querySelector('#author_id').value,
+        uid: userId
       };
       createBook(bookObject).then((booksArray) => showBooks(booksArray));
     }
