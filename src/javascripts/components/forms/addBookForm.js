@@ -1,6 +1,6 @@
 import selectAuthor from './selectAuthor';
 
-const addBookForm = (obj = {}) => {
+const addBookForm = (userId, obj = {}) => {
   document.querySelector('#store').innerHTML = '';
   document.querySelector('#add-button').innerHTML = '';
   document.querySelector('#form-container').innerHTML = `
@@ -32,7 +32,7 @@ const addBookForm = (obj = {}) => {
       class="btn btn-primary">Submit Book</button>
     </form>`;
 
-  selectAuthor(`${obj.author_id || ''}`);
+  selectAuthor(userId, `${obj.author_id || ''}`);
 };
 
 export default addBookForm;
