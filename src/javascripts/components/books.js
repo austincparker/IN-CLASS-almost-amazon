@@ -16,6 +16,7 @@ const showBooks = (array) => {
         <button class="btn btn-danger" id="delete-book--${item.firebaseKey}">Delete Book</button>
         </div>
       </div>`;
+    console.warn(item);
   });
 };
 
